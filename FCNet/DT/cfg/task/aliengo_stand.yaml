@@ -1,0 +1,7 @@
+log_dir_name: stand_aliengo
+total_collect_samples: ${resolve_default:1000000,${..total_collect_samples}}
+max_episode_length: 300
+state_dim: 30
+action_dim: 12
+reward_limit: 15
+legged_gym_version: old

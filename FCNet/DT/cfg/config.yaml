@@ -1,0 +1,135 @@
+task_name: ${hydra:runtime.choices.task}
+headless: True
+seq_len: null
+local_rank: ${hydra:job.num}
+resume: True
+num_envs: 4096
+load_run: null
+checkpoint: null
+simplify_print_info: False
+
+# ---------------------- play ----------------------
+record: False
+
+print_inference_action_time: False
+play_ep_cnt: 1
+ac_ratio: 1.0
+max_episode_length: -1 # train(episode) play
+aligo_auto_complete_chks: False # fetch chks from aligo if not found locally
+
+crf: 23 # compress video rate, crf smaller, video size larger
+dt_policy_name: null
+
+dummy: False
+add_noise: True
+push_robots: True
+personal: True
+
+multi_gpu: False
+
+kv_cache: False # transformer with kv_cache only support one env
+
+legged_gym_version_checked: ${check_choices:${task.legged_gym_version},${not:${train}},[old,new]}
+
+model_name: null
+model_name_checked: ${check_choices:${model_name},${not:${train}},[mlp,transformer,retnet,null]}
+# ---------------------- play save data ----------------------
+dt_mode_name: ${hydra:runtime.choices.dt_mode}
+limit_mode_name: ${hydra:runtime.choices.limit_mode}
+reward_limit: ''
+
+data_save_to: ../data
+remerge_sub_data: False # don't sample data, only merge subdatas
+total_collect_samples: ''
+max_workers: null
+test_train_mode: False
+save_data: null # episode, chunk
+calc_dt_mlp_loss: False # calculate loss of transformer and mlp outputs if True
+skip_episodes: 0 # episodes to skip, only valid in save data
+# ---------------------- train mlp ----------------------
+
+# ---------------------- train DT ----------------------
+max_used_memory: 1000 # if the memory used of a gpu is smaller than this, we think it is not used, MB is a unit
+task_config_name: null # e.g. expert will load expert.yaml
+train_log_dir: './log'
+
+# retnet
+double_v_dim: True
+time_tag: null # chk and log dir's name
+
+d_m: 768 # gpt-2
+n_layer: 12 # gpt-2
+n_head: 12 # gpt-2
+ffn_coef: null # gpt-2
+epochs: null
+lr: 0.0001
+weight_decay: 0.0001
+optimizer_use_triton: True
+warmup_ratio: 0.2
+clip: 1.0
+dropout: 0.1
+train_ratio: 0.9
+batch_size: 240
+
+# fourier
+fno_hidden_size: 128
+width: 128
+final_hidden_size: 128
+inv_dyn_model_hidden_size: 128
+n_modes: 10
+ctx_dim: 16
+is_chunk_wise: False
+
+data_read_from: ./data/data
+tasks: null # should be overrided, is a list
+test_interval: 1
+log_root: ./log
+save_interval: null
+aligo_enable: False
+
+use_fp16: False
+use_flash_attn: False
+is_causal: False
+
+export_model_as_jit: False
+
+train: False
+data_mode: null
+data_mode_checked: ${check_choices:${data_mode},${or:${train},${save_data}},[mdp,nonmdp]}
+load_data_mode: null # chunk2chunk episode2episode episode2chunk
+
+add_last_action: False # valid only when load_data_mode=episode, add last action to the input
+
+save_test_best: False
+use_tensorboard: False
+use_wandb: False
+distributed: True
+data_scale: False
+max_sample_number: null # limit the number of samples
+load_data_statistics: False # calculate max min nan_cnt ... when loading data
+episode_first_no_backward: False # episode train first max episode length no backward
+
+src_dim: null # max of all data_dims
+
+aligo_name: mk
+aligo_data_root_dir: /postgraduate/data/RL
+
+host_name_mapping:
+    snfln1648890518-0: g39
+    iuxec1648904174-0: g42
+    aamhq1648926718-0: g41
+
+defaults:
+    - _self_
+    - optional task: aliengo_stand
+    - optional dt_mode: as_a
+    - optional limit_mode: null # should be null
+    - override hydra/job_logging: disabled
+    # - override hydra/launcher: joblib # because headless is False, only play one
+
+hydra:
+    output_subdir: null
+    run:
+        dir: .
+    # launcher:
+    #     n_jobs: 1

@@ -1,0 +1,4 @@
+kitchen:
+    player_level: 'complete'
+    max_episode_length: -1
+    max_train_steps: null

@@ -1,0 +1,25 @@
+unitree_general:
+    player_level: 'expert'
+    max_episode_length: 256
+    max_train_steps: 60_000_000
+    # max_train_steps: 60_000
+
+halfcheetah:
+    player_level: 'medium'
+    max_episode_length: -1
+    max_train_steps: null
+
+hopper:
+    player_level: 'medium'
+    max_episode_length: -1
+    max_train_steps: null
+
+walker2d:
+    player_level: 'medium'
+    max_episode_length: -1
+    max_train_steps: null
+
+ant:
+    player_level: 'medium'
+    max_episode_length: -1
+    max_train_steps: null

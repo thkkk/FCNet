@@ -1,0 +1,7 @@
+log_dir_name: flat_B1
+total_collect_samples: ${resolve_default:1000000,${..total_collect_samples}}
+max_episode_length: 1001
+state_dim: 48
+action_dim: 12
+reward_limit: -1
+legged_gym_version: old

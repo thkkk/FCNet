@@ -1,0 +1,19 @@
+door:
+    player_level: 'cloned'
+    max_episode_length: -1
+    max_train_steps: null
+
+pen:
+    player_level: 'cloned'
+    max_episode_length: -1
+    max_train_steps: null
+
+hammer:
+    player_level: 'cloned'
+    max_episode_length: -1
+    max_train_steps: null
+    
+relocate:
+    player_level: 'cloned'
+    max_episode_length: -1
+    max_train_steps: null

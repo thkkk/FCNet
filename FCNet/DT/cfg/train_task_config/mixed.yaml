@@ -1,0 +1,4 @@
+kitchen:
+    player_level: 'mixed'
+    max_episode_length: -1
+    max_train_steps: null

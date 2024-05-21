@@ -1,0 +1,8 @@
+log_dir_name: general_unitree
+total_collect_samples: ${resolve_default:1000000,${..total_collect_samples}}
+max_episode_length: ${resolve_default:1001,${..max_episode_length}}
+# state_dim: 70
+state_dim: 58
+action_dim: 12
+reward_limit: ${resolve_default:20,${..reward_limit}}
+legged_gym_version: new
