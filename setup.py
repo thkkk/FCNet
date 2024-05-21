@@ -7,7 +7,7 @@ install_requires = [
     'matplotlib', 
     'scipy', 
     'tqdm',
-    'transformers', 
+    'transformers==4.34.0', 
     'numba', 
     'wandb', 
     'aligo',
@@ -16,7 +16,7 @@ install_requires = [
     'EasyProcess',
     'opencv-python', 
     'imageio[ffmpeg]', 
-    'hydra-core',
+    'hydra-core==1.3.2',
     'omegaconf', 
     'hydra-joblib-launcher', 
     'opensimplex',
@@ -25,10 +25,11 @@ install_requires = [
     'torchscale', 
     'pytz',
     'timm', 
-    'lion-pytorch', 
+    'lion-pytorch==0.1.2', 
     'torchscale==0.3.0', 
-    'triton', # need
+    'triton==2.0.0', # need
     'd4rl', # need d4rl to generate data
+    'gym',
 ]
 
 setup(

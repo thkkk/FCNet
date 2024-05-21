@@ -37,7 +37,7 @@ np.set_printoptions(suppress=True, formatter={'float_kind': '{:16.3f}'.format}, 
 from utils.common import purge, find_file, convert_second_to_format, loss_calc, \
     TimeCounter, sync_mgpu, convert_tensor_to_shape
 from utils.type_utils import EPISODE_LOAD_MODES, CHUNK_LOAD_MODES
-from models import DecisionTransformer, DecisionRetNet
+from models import DecisionTransformer, FourierController
 from data.load_data import EpisodeLoader
 
 
@@ -46,7 +46,7 @@ class Runner:
     retain_graph = True # only valid when in episode train mode
     detect_anomaly = False # only valid when in episode train mode
 
-    def __init__(self, model: Union[DecisionRetNet, DecisionTransformer], 
+    def __init__(self, model: Union[FourierController, DecisionTransformer], 
                  scheduler, optimizer, 
                  train_loader: Union[DataLoader, EpisodeLoader], 
                  test_loader: Union[DataLoader, EpisodeLoader],

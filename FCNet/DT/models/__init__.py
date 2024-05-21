@@ -7,4 +7,4 @@
 # from FCNet.DT.models.decision_retnet_official import DecisionRetNet
 
 from .decision_transformer_trimmed import DecisionTransformer
-from .decision_retnet_official import DecisionRetNet
+from .fourier_controller import FourierController

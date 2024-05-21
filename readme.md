@@ -1,18 +1,24 @@
+# Fourier Controller Networks for Real-Time Decision-Making in Embodied Learning
 ## installation
 
 at least: 
+- we recommend virtual env with `python=3.8`.
 - `pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113`
-- gym, d4rl
-- isaacgym, legged_gym
-
 - `pip install -e .` 
+
+## dataset
+
+The part of dataset is in `FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial/`. 
+
+Our dataset is processed as mentioned in the FCNet paper, concatenating state and action together.
 
 ## training example
 
-under `FCNet/DT/` path
+Copy the data folder like `unitree_general_expert_320000_191_r-100` into the `FCNet/FCNet/DT/data/data` directory so that the `FCNet/FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial` directory contains three .dat files.
 
 ### DT
-```
+```bash
+cd FCNet/DT/  # Need to run in the FCNet/DT/ directory
 screen -X -S train quit
 screen -dm -S train bash -c \
 'OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=`python ./scripts/calc_avail_gpus.py -mg 8` train.py \
@@ -23,9 +29,13 @@ save_test_best=True use_wandb=False use_tensorboard=False \
 > train.log 2>&1'
 ```
 
+And then you will see a `train.log` log file in `FCNet/DT/` path.
+
 ### FCNet
 
-```
+```bash
+# training unitree aliengo
+cd FCNet/DT/  # Need to run in the FCNet/DT/ directory
 screen -X -S train quit
 screen -dm -S train bash -c \
 'OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=`python ./scripts/calc_avail_gpus.py -mg 8` train.py \
@@ -33,19 +43,36 @@ n_layer=4 batch_size=128 data_mode=nonmdp epochs=50 lr=0.005 seq_len=64 n_modes=
 tasks=[unitree_general] task_config_name=expert max_used_memory=2000 \
 train=True \
 save_test_best=True use_wandb=False use_tensorboard=True \
-> train1.log 2>&1'
+> train.log 2>&1'
 ```
 
+Generally, the loss of FCNet will be much smaller than that of Decision Transformer, especially when the amount of data is small.
 
+If you want to train on d4rl dataset, you can use the script under `FCNet/FCNet/DT/d4rl`. First, use `download_d4rl.py` to download the d4rl data set to obtain the .pkl data set. Then run `convert_pkl_to_memmap.py` to convert it to our format, which will generate a dataset folder like `halfcheetah_expert_1000_1000` in the `FCNet/FCNet/DT/data/data/` directory.
+
+```bash
+# training d4rl hopper-medium
+screen -X -S d4rl_train quit
+screen -dm -S d4rl_train bash -c \
+'OMP_NUM_THREADS=1 torchrun --standalone --nnodes=1 --nproc_per_node=`python ./scripts/calc_avail_gpus.py -mg 8` train.py \
+d_m=128 n_layer=4 n_head=12 batch_size=16 data_mode=nonmdp epochs=50 lr=0.005 weight_decay=0.0001 seq_len=100 n_modes=10 ctx_dim=1 width=128 fno_hidden_size=512 final_hidden_size=128 dt_mode=as_a model_name=fourier_controller load_data_mode=episode2chunk \
+tasks=[hopper] task_config_name=medium max_used_memory=2000 \
+train=True \
+save_test_best=True use_wandb=False use_tensorboard=False \
+> train.log 2>&1'
+```
+
+After training, in `FCNet/FCNet/DT/log/unitree_general` path, you will see a timestamp string like `2024-01-20_22-56-27` which means model_id.
 
 ## inference example
 
-under `FCNet/DT/data/data_collect` path
+Replace the model_id `dt_policy_name=2024-01-20_22-56-27` in the following run command with the actual model you need to infer.
 
-replace model_id
+unitree aliengo: (NOTE: If you need to view the effect in the simulator during inference, please install `Isaac Gym Preview 3` (Preview 2 will not work!) from https://developer.nvidia.com/isaac-gym
+and `legged_gym`.)
 
-unitree aliengo:
-```
+```bash
+cd FCNet/DT/data/data_collectcd 
 screen -dm -S play bash -c \
 'python play.py -m hydra/launcher=joblib \
     task=unitree_general \
@@ -66,9 +93,7 @@ screen -dm -S play bash -c \
 ```
 set `print_inference_action_time=True` for evaluating inference time.
 
-Or `python d4rl_parallel_test_speed.py`  under `FCNet/DT/d4rl` path
-
-d4rl:
+d4rl evaluation:
 ```
 # medium-expert
 screen -X -S play_d4rl quit
@@ -79,14 +104,13 @@ screen -dm -S play_d4rl bash -c \
     --dt_policy_name 2024-01-26_13-55-05 --kv_cache > play_d4rl.log 2>&1'
 ```
 
-
-
-## dataset
-
-The part of dataset is in `FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial/`. Running the above training program will load it automatically.
-
-
 ## Acknowledgement
 
-- Decision Transformer
-- 
+- [Decision Transformer](https://github.com/kzl/decision-transformer)
+- [nerfies](https://github.com/nerfies/nerfies.github.io)
+
+## BibTeX
+If you find our work useful for your project, please consider citing the following paper.
+
+```
+```
