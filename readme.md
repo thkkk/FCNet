@@ -8,7 +8,7 @@ at least:
 
 ## Dataset
 
-The 2M version dataset is in (Download link)[https://ml.cs.tsinghua.edu.cn/~hengkai/unitree_general_expert_10000_191_r-100.zip].
+The 2M version dataset is in [Download link](https://ml.cs.tsinghua.edu.cn/~hengkai/unitree_general_expert_10000_191_r-100.zip).
 <!-- The part of dataset is in `FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial/`.  -->
 
 Our dataset is processed as mentioned in the FCNet paper, concatenating state and action together.
