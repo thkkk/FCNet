@@ -6,15 +6,16 @@ at least:
 - `pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113`
 - `pip install -e .` 
 
-## dataset
+## Dataset
 
-The part of dataset is in `FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial/`. 
+The 2M version dataset is in (Download link)[https://ml.cs.tsinghua.edu.cn/~hengkai/unitree_general_expert_10000_191_r-100.zip].
+<!-- The part of dataset is in `FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial/`.  -->
 
 Our dataset is processed as mentioned in the FCNet paper, concatenating state and action together.
 
-## training example
+## Training example
 
-Copy the data folder like `unitree_general_expert_320000_191_r-100` into the `FCNet/FCNet/DT/data/data` directory so that the `FCNet/FCNet/DT/data/data/unitree_general_expert_240000_255_r-100_partial` directory contains three .dat files.
+Copy the data folder like `unitree_general_expert_10000_191_r-100` into the `FCNet/DT/data/data` directory so that the `FCNet/DT/data/data/unitree_general_expert_10000_191_r-100` directory contains three .dat files.
 
 ### DT
 ```bash
@@ -48,7 +49,7 @@ save_test_best=True use_wandb=False use_tensorboard=True \
 
 Generally, the loss of FCNet will be much smaller than that of Decision Transformer, especially when the amount of data is small.
 
-If you want to train on d4rl dataset, you can use the script under `FCNet/FCNet/DT/d4rl`. First, use `download_d4rl.py` to download the d4rl data set to obtain the .pkl data set. Then run `convert_pkl_to_memmap.py` to convert it to our format, which will generate a dataset folder like `halfcheetah_expert_1000_1000` in the `FCNet/FCNet/DT/data/data/` directory.
+If you want to train on d4rl dataset, you can use the script under `FCNet/DT/d4rl`. First, use `download_d4rl.py` to download the d4rl data set to obtain the .pkl data set. Then run `convert_pkl_to_memmap.py` to convert it to our format, which will generate a dataset folder like `halfcheetah_expert_1000_1000` in the `FCNet/DT/data/data/` directory.
 
 ```bash
 # training d4rl hopper-medium
