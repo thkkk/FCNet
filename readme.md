@@ -114,4 +114,12 @@ screen -dm -S play_d4rl bash -c \
 If you find our work useful for your project, please consider citing the following paper.
 
 ```
+@misc{tan2024fourier,
+      title={Fourier Controller Networks for Real-Time Decision-Making in Embodied Learning}, 
+      author={Hengkai Tan and Songming Liu and Kai Ma and Chengyang Ying and Xingxing Zhang and Hang Su and Jun Zhu},
+      year={2024},
+      eprint={2405.19885},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
 ```
