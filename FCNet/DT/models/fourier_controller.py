@@ -10,7 +10,8 @@ class FourierController(nn.Module):
     [s1, s2, ..., sT] ----> [a1, a2, ..., aT]\n
     [ctx1, ..., ctxT] --|
 
-    Only predict next action based on current states and contexts.
+    Only predict next action based on current states and contexts. In fact, the contexts can be merged
+    into the states, but we keep them separate for better understanding.
 
     Support both recurrent and parallel computation.
     Default: parallel computation.

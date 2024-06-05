@@ -15,6 +15,8 @@ Our dataset is processed as mentioned in the FCNet paper, concatenating state an
 
 ## Training example
 
+The core code of FCNet is in `FCNet/DT/models/fourier_controller.py`.
+
 Copy the data folder like `unitree_general_expert_10000_191_r-100` into the `FCNet/DT/data/data` directory so that the `FCNet/DT/data/data/unitree_general_expert_10000_191_r-100` directory contains three .dat files.
 
 ### DT
