@@ -1,5 +1,5 @@
 # Fourier Controller Networks for Real-Time Decision-Making in Embodied Learning, ICML 2024
-## installation
+## Installation
 
 at least: 
 - we recommend virtual env with `python=3.8`.
@@ -67,7 +67,7 @@ save_test_best=True use_wandb=False use_tensorboard=False \
 
 After training, in `FCNet/FCNet/DT/log/unitree_general` path, you will see a timestamp string like `2024-01-20_22-56-27` which means model_id.
 
-## inference example
+## Inference example
 
 Replace the model_id `dt_policy_name=2024-01-20_22-56-27` in the following run command with the actual model you need to infer.
 

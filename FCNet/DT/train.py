@@ -70,7 +70,7 @@ def main(cfg: DictConfig):
         cfg_dict['save_test_best'] = False
         cfg_dict['data_scale'] = True
 
-    # yaml 参数
+    # yaml config
     d_m = cfg_dict['d_m']
     n_layer = cfg_dict['n_layer']
     n_head = cfg_dict['n_head']
@@ -248,7 +248,7 @@ world_size: {world_size}, local_device_id: {local_device_id}')
     else:
         optimizer = Lion(model.parameters(), lr=lr, weight_decay=weight_decay, 
                         use_triton=optimizer_use_triton)
-    # 估计train_steps
+    # estimate train_steps
     num_training_steps = int(epochs * train_loader_len)
     if episode_first_no_backward:
         raise NotImplementedError
