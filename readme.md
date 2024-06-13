@@ -1,4 +1,8 @@
 # Fourier Controller Networks for Real-Time Decision-Making in Embodied Learning, ICML 2024
+
+- [Paper](https://arxiv.org/pdf/2405.19885)
+- [Project Page](https://thkkk.github.io/fcnet)
+
 ## Installation
 
 at least: 
