@@ -2,6 +2,7 @@
 
 - [Paper](https://arxiv.org/pdf/2405.19885)
 - [Project Page](https://thkkk.github.io/fcnet)
+- Other Contributors: [Kai Ma](https://github.com/mk2001233), [Songming Liu](https://github.com/csuastt)
 
 ## Installation
 
